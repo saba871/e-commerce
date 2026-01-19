@@ -5,6 +5,8 @@ import CartBadge from "./CartBadge"
 const navLinks = [
     { to: "/", label: "Home" },
     { to: "/items", label: "Collection" },
+    { to: "/about", label: "About" },
+    { to: "/contact", label: "Contact" },
 ]
 
 const authLinks = [

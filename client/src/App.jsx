@@ -5,6 +5,8 @@ import LogIn from "./pages/Login"
 import Register from "./pages/Register"
 import Panel from "./pages/Panel"
 import Items from "./pages/Items"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
 import CartDrawer from "./components/CartDrawer"
 
 function App() {
@@ -13,9 +15,11 @@ function App() {
             <Nav />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/items" element={<Items />} />
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/items" element={<Items />} />
                 <Route path="/panel" element={<Panel />} />
             </Routes>
             <CartDrawer />
