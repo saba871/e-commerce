@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom"
 import { useCart } from "../context/cart.context"
 
 const formatCurrency = (value) =>
     new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value ?? 0)
 
 const CartDrawer = () => {
+    const navigate = useNavigate()
     const { cartItems, cartTotal, isCartOpen, toggleCart, updateQuantity, removeFromCart, clearCart } = useCart()
 
     return (
@@ -84,6 +86,12 @@ const CartDrawer = () => {
                         <span className="text-lg text-slate-900">{formatCurrency(cartTotal)}</span>
                     </div>
                     <button
+                        onClick={() => {
+                            if (cartItems.length === 0) return
+                            clearCart()
+                            toggleCart(false)
+                            navigate("/success")
+                        }}
                         disabled={cartItems.length === 0}
                         className="primary-btn mt-5 w-full disabled:cursor-not-allowed disabled:bg-slate-300"
                     >
