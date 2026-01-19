@@ -29,7 +29,7 @@ const Home = () => {
                 <div className="relative z-10 max-w-3xl text-white">
                     <p className="tag-pill border-white/40 text-white/80">New Season</p>
                     <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-                        Curated fashion essentials for the modern atelier
+                        Curated fashion essentials for the modern atelier.
                     </h1>
                     <p className="mt-6 text-lg text-white/75">
                         Luxe fabrics, sculptural lines, and considered details. Discover limited-run collections designed for elevated daily rituals.
