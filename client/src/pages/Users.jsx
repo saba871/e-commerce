@@ -3,7 +3,6 @@ import { useAuth } from "../context/auth.context"
 
 
 const Users = () => {
-c
     const { allUser, getAllUser } = useAuth()
 
     useEffect(() => {
