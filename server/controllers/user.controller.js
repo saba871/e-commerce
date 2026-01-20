@@ -20,6 +20,17 @@ const sendToken = (user, statusCode, res) => {
 }
 
 
+const getUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+
+        return res.status(200).json(users);
+    } catch (error) {
+        console.log('error in get users', error);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 
 // რეგისტრაცია
 const signup = async (req, res) => {
@@ -95,5 +106,6 @@ module.exports = {
     signup,
     logIn,
     logOut,
-    sendToken
+    sendToken,
+    getUsers
 };

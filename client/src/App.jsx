@@ -9,6 +9,7 @@ import About from "./pages/About"
 import Contact from "./pages/Contact"
 import Success from "./pages/Success"
 import CartDrawer from "./components/CartDrawer"
+import Users from "./pages/Users"
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/panel" element={<Panel />} />
                 <Route path="/success" element={<Success />} />
+                <Route path="/users" element={<Users />} />
             </Routes>
             <CartDrawer />
         </div>

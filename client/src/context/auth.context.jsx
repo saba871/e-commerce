@@ -10,6 +10,7 @@ const API_URL = import.meta.env.VITE_API_URL + '/api/auth'
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
+    const [allUser, setAllUser] = useState([])
 
     const navigate = useNavigate()
 
@@ -34,6 +35,21 @@ export const AuthProvider = ({ children }) => {
 
         autoLogin()
     }, [])
+
+
+    const getAllUser = async () => {
+        try {
+            const res = await fetch(`${API_URL}`, {
+                method: 'GET',
+                credentials: 'include'
+            })
+
+            const result = await res.json()
+            setAllUser(result)
+        } catch (error) {
+            console.log("error in getAllUser", error);
+        }
+    }
 
     const signup = async (formObj) => {
         try {
@@ -90,7 +106,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signup, logIn, logout }}>
+        <AuthContext.Provider value={{ user, signup, logIn, logout, getAllUser, allUser }}>
             {children}
         </AuthContext.Provider>
     )
