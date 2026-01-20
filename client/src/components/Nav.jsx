@@ -7,7 +7,6 @@ const navLinks = [
     { to: "/items", label: "Collection" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
-    { to: "/users", label: "Users" },
 ]
 
 const authLinks = [
