@@ -2,17 +2,17 @@ const studios = [
     {
         city: "Florence",
         address: "Via dei Fossi 14, 50123",
-        hours: "Mon–Sat, 10a-7p",
+        hours: "Mon-Sat, 10a-7p",
     },
     {
         city: "Copenhagen",
         address: "Store Strandstræde 9, 1255",
-        hours: "Tue–Sun, 11a-6p",
+        hours: "Tue-Sun, 11a-6p",
     },
     {
         city: "Mexico City",
         address: "Av. Álvaro Obregón 99, Roma Norte",
-        hours: "Wed–Sun, 12p-8p",
+        hours: "Wed-Sun, 12p-8p",
     },
 ]
 

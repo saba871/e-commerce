@@ -7,6 +7,7 @@ const navLinks = [
     { to: "/items", label: "Collection" },
     { to: "/about", label: "About" },
     { to: "/contact", label: "Contact" },
+    { to: "/users", label: "Users" },
 ]
 
 const authLinks = [
@@ -16,6 +17,8 @@ const authLinks = [
 
 const Nav = () => {
     const { user, logout } = useAuth()
+
+    const isAdmin = user && user.isAdmin === true
 
     return (
         <header className="sticky top-0 z-40 bg-stone-50/90 backdrop-blur">
@@ -36,6 +39,17 @@ const Nav = () => {
                             {link.label}
                         </NavLink>
                     ))}
+
+                    {isAdmin && (
+                        <NavLink
+                            to="/users"
+                            className={({ isActive }) =>
+                                `transition hover:text-slate-900 ${isActive ? "text-slate-900" : "text-slate-500"}`
+                            }
+                        >
+                            Users
+                        </NavLink>
+                    )}
                 </nav>
 
                 <div className="flex items-center gap-3">
