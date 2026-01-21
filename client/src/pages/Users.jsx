@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { useAuth } from "../context/auth.context"
 
 const Users = () => {
-    const { allUser, getAllUser } = useAuth()
+    const { allUser, getAllUser, deleteUser, changeUser } = useAuth()
 
     useEffect(() => {
         getAllUser()
@@ -47,11 +47,20 @@ const Users = () => {
                                 <div className="mt-6 flex flex-wrap gap-3">
                                     <button
                                         type="button"
-                                        className="inline-flex flex-1 items-center justify-center rounded-2xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-900/30 hover:text-slate-900"
-                                    >
+                                        onClick={() => {
+                                            const name = prompt("New name", user.name)
+                                            const email = prompt("New email", user.email)
+
+                                            if (!name || !email) return
+
+                                            changeUser(user._id, { name, email })
+                                        }}
+                                        className="inline-flex flex-1 items-center justify-center rounded-2xl border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-900/30 hover:text-slate-900">
                                         Update
                                     </button>
+                                    
                                     <button
+                                        onClick={() => deleteUser(user._id)}
                                         type="button"
                                         className="inline-flex flex-1 items-center justify-center rounded-2xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
                                     >

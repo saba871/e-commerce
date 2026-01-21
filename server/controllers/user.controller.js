@@ -32,6 +32,47 @@ const getUsers = async (req, res) => {
 }
 
 
+
+// ვშლით მომხამრებელს
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const user = await User.findByIdAndDelete(id);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.status(200).json("user deleted");
+  } catch (error) {
+    console.log("error in deleteUser", error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
+
+// user ის infos შეცვლა
+const changeUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { name, email, isAdmin } = req.body;
+
+    const user = await User.findByIdAndUpdate(id, { name, email, isAdmin }, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.log("error in changeUser", error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+
 // რეგისტრაცია
 const signup = async (req, res) => {
     try {
@@ -107,5 +148,7 @@ module.exports = {
     logIn,
     logOut,
     sendToken,
-    getUsers
+    getUsers,
+    deleteUser,
+    changeUser
 };

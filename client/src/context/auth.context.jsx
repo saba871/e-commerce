@@ -51,6 +51,40 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+
+    const deleteUser = async (id) => {
+      try {
+        const res = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        })
+
+        const result = await res.json()
+        setAllUser(prev => prev.filter(user => user._id !== id))
+      } catch (error) {
+        console.log("error in deleteUser", error);
+      }
+    }
+
+
+    const changeUser = async (id, formObj) => {
+      try {
+        const res = await fetch(`${API_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formObj),
+            credentials: 'include'
+        })
+
+        const result = await res.json()
+        setAllUser(prev => prev.map(user => user._id === id ? result : user))
+      } catch (error) {
+        console.log("error in changeUser", error);
+      }
+    }
+
     const signup = async (formObj) => {
         try {
             const res = await fetch(`${API_URL}/signup`, {
@@ -106,7 +140,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signup, logIn, logout, getAllUser, allUser }}>
+        <AuthContext.Provider value={{ user, signup, logIn, logout, getAllUser, allUser, deleteUser, changeUser }}>
             {children}
         </AuthContext.Provider>
     )
