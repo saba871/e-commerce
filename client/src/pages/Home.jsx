@@ -1,122 +1,169 @@
+import { motion } from "framer-motion";
+
 const collections = [
     {
         title: "Sculpted Essentials",
-        description: "Architectural silhouettes, Italian textiles, and modern tailoring for the everyday muse.",
+        description: "Architectural silhouettes and modern tailoring.",
         image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80",
+        size: "xl:col-span-2" // დიდ ეკრანზე 2 სვეტს დაიკავებს
     },
     {
-        title: "Luminous Jewelry",
-        description: "Handcrafted 18k gold chains and statement earrings inspired by celestial geometry.",
+        title: "Luminous",
+        description: "Celestial geometry in gold.",
         image: "https://images.unsplash.com/photo-1475180098004-ca77a66827be?auto=format&fit=crop&w=800&q=80",
+        size: "xl:col-span-1"
     },
     {
-        title: "Editorial Footwear",
-        description: "Parisian-made boots with sculptural heels and buttery-soft pebble leather.",
+        title: "Editorial",
+        description: "Parisian-made footwear.",
         image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
+        size: "xl:col-span-1"
     },
-]
+];
+
+const fadeInUp = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+};
 
 const Home = () => {
     return (
-        <main className="px-4 pb-24 pt-12 sm:px-8 lg:px-12">
-            <section className="glass-panel relative overflow-hidden px-6 py-12 sm:px-12">
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/70 via-slate-900/30 to-transparent" />
-                <img
-                    src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1800&q=80"
-                    alt="Runway"
-                    className="absolute inset-0 h-full w-full object-cover"
-                />
-                <div className="relative z-10 max-w-3xl text-white">
-                    <p className="tag-pill border-white/40 text-white/80">New Season</p>
-                    <h1 className="mt-6 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-                        Curated fashion essentials for the modern atelier.
+        <motion.main
+            initial="initial"
+            animate="animate"
+            // მაქსიმალური სიგანე გავზარდეთ 1600px-მდე და გვერდებზე დავამატეთ მეტი სივრცე
+            className="mx-auto w-full max-w-[1600px] space-y-32 pb-24 pt-12 px-6 sm:px-10 lg:px-20"
+        >
+            {/* --- HERO SECTION --- */}
+            <section className="relative grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
+                <motion.div variants={fadeInUp} className="lg:col-span-7 xl:col-span-7">
+                    <span className="tag-pill mb-6">Collection 2026</span>
+                    <h1 className="text-6xl font-black leading-[1.05] tracking-tighter sm:text-8xl lg:text-8xl xl:text-9xl">
+                        Design <br />
+                        <span className="text-slate-400 italic font-light">meets</span> Atelier.
                     </h1>
-                    <p className="mt-6 text-lg text-white/75">
-                        Luxe fabrics, sculptural lines, and considered details. Discover limited-run collections designed for elevated daily rituals.
+                    <p className="mt-8 max-w-xl text-lg leading-relaxed text-slate-500 lg:text-xl">
+                        Curated fashion essentials for the modern muse. Discover limited-run collections designed for elevated daily rituals.
                     </p>
-                    <div className="mt-8 flex flex-wrap gap-3">
-                        <button className="primary-btn">Shop New Arrivals</button>
-                        <button className="secondary-btn text-white">Explore Collections</button>
+                    <div className="mt-10 flex flex-wrap gap-5">
+                        <button className="primary-btn px-10 py-4">Shop The Edit</button>
+                        <button className="secondary-btn px-10 py-4">Our Story</button>
                     </div>
-                </div>
+                </motion.div>
+
+                {/* სურათი ახლა უფრო გამოწეულია მარჯვნივ */}
+                <motion.div
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                    className="relative lg:col-span-5 xl:col-span-5"
+                >
+                    <div className="tilt-hover aspect-[4/5] w-full overflow-hidden rounded-[3rem] shadow-2xl">
+                        <img
+                            src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1800&q=80"
+                            className="h-full w-full object-cover"
+                            alt="Main Fashion"
+                        />
+                    </div>
+                    {/* Floating Card - ახლა მარჯვენა კიდეზეა მიკრული */}
+                    <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="glass-panel absolute -bottom-8 -right-4 hidden max-w-[240px] p-6 lg:block border-slate-200/50"
+                    >
+                        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400">Next Drop</p>
+                        <p className="mt-1 text-lg font-semibold italic text-slate-900">Milan Fashion Week 26'</p>
+                    </motion.div>
+                </motion.div>
             </section>
 
-            <section className="mt-16 space-y-14">
-                <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+            {/* --- BENTO GRID SECTION --- */}
+            <section className="w-full">
+                <div className="mb-12 flex items-end justify-between border-b border-slate-100 pb-8">
                     <div>
-                        <p className="tag-pill">Collections</p>
-                        <h2 className="mt-4 text-3xl font-semibold tracking-tight">Editorial drops</h2>
-                        <p className="mt-2 max-w-2xl text-slate-500">
-                            Meticulously sourced materials, developed in micro batches with ateliers across Milan, Copenhagen, and Tokyo.
-                        </p>
+                        <h2 className="text-5xl font-bold tracking-tight">The Gallery</h2>
+                        <p className="mt-2 text-slate-500 font-medium text-lg">Selected editorial drops.</p>
                     </div>
-                    <button className="secondary-btn">See all stories</button>
+                    <button className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 hover:text-slate-900 transition-colors pb-1">
+                        View All Stories
+                    </button>
                 </div>
 
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {collections.map((collection) => (
-                        <article key={collection.title} className="group glass-panel overflow-hidden border-none p-0">
-                            <div className="relative h-72 overflow-hidden">
-                                <img
-                                    src={collection.image}
-                                    alt={collection.title}
-                                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/20 to-transparent" />
+                <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
+                    {collections.map((col, i) => (
+                        <motion.div
+                            key={i}
+                            variants={fadeInUp}
+                            whileInView="animate"
+                            viewport={{ once: true }}
+                            className={`tilt-hover group relative overflow-hidden rounded-[2.5rem] bg-slate-100 ${col.size}`}
+                        >
+                            <img
+                                src={col.image}
+                                alt={col.title}
+                                className="h-[550px] w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent p-12 flex flex-col justify-end text-white">
+                                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/50 mb-3">Autumn / Winter 26</span>
+                                <h3 className="text-4xl font-bold tracking-tight">{col.title}</h3>
+                                <p className="mt-3 max-w-sm text-base text-white/70 leading-relaxed">{col.description}</p>
                             </div>
-                            <div className="space-y-3 px-6 py-6">
-                                <h3 className="text-2xl font-semibold text-slate-900">{collection.title}</h3>
-                                <p className="text-slate-500">{collection.description}</p>
-                                <button className="text-sm font-semibold uppercase tracking-wide text-slate-900">
-                                    Discover the edit →
-                                </button>
-                            </div>
-                        </article>
+                        </motion.div>
                     ))}
                 </div>
             </section>
 
-            <section className="mt-20 grid gap-10 lg:grid-cols-2">
-                <div className="glass-panel space-y-5">
-                    <p className="tag-pill">Journal</p>
-                    <h2 className="text-3xl font-semibold tracking-tight">Crafted in detail</h2>
-                    <p className="text-slate-500">
-                        From atelier visits in Florence to textiles sourced in Kyoto—our makers obsess over every panel, stitch, and finish. Each silhouette is cut to flatter and meant to last beyond seasons.
-                    </p>
-                    <div className="grid gap-6 sm:grid-cols-2">
-                        <div>
-                            <p className="text-4xl font-semibold">72</p>
-                            <p className="text-sm text-slate-500">Hours spent on each prototype</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-semibold">18</p>
-                            <p className="text-sm text-slate-500">Boutique ateliers in collaboration</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-semibold">96%</p>
-                            <p className="text-sm text-slate-500">Natural fabric compositions</p>
-                        </div>
-                        <div>
-                            <p className="text-4xl font-semibold">12</p>
-                            <p className="text-sm text-slate-500">Limited drops per year</p>
-                        </div>
+            {/* --- STATS SECTION --- */}
+            <section className="glass-panel grid grid-cols-2 gap-12 py-24 text-center md:grid-cols-4 border-none shadow-sm">
+                {[
+                    { val: "72h", label: "Prototyping" },
+                    { val: "18", label: "Ateliers" },
+                    { val: "96%", label: "Natural" },
+                    { val: "12", label: "Yearly Drops" }
+                ].map((stat, i) => (
+                    <div key={i} className="group cursor-default">
+                        <p className="text-6xl font-black tracking-tighter text-slate-900 transition-transform group-hover:scale-110">
+                            {stat.val}
+                        </p>
+                        <p className="mt-3 text-[11px] font-bold uppercase tracking-[0.3em] text-slate-400">
+                            {stat.label}
+                        </p>
                     </div>
-                </div>
-
-                <div className="glass-panel space-y-6">
-                    <p className="tag-pill">Newsletter</p>
-                    <h2 className="text-3xl font-semibold tracking-tight">Studio briefings</h2>
-                    <p className="text-slate-500">
-                        Elevated styling guidance, atelier visits, bespoke previews, and private sale invitations—delivered monthly.
-                    </p>
-                    <form className="flex flex-col gap-4 sm:flex-row">
-                        <input type="email" placeholder="Email address" className="input-field" />
-                        <button className="primary-btn whitespace-nowrap">Join list</button>
-                    </form>
-                </div>
+                ))}
             </section>
-        </main>
-    )
-}
 
-export default Home
+            {/* --- NEWSLETTER --- */}
+            <section className="w-full">
+                <motion.div
+                    whileInView={{ y: 0, opacity: 1 }}
+                    initial={{ y: 40, opacity: 0 }}
+                    className="glass-panel relative overflow-hidden bg-slate-900 py-28 text-center text-white rounded-[4rem]"
+                >
+                    <div className="absolute top-0 right-0 -mr-20 -mt-20 h-80 w-80 rounded-full bg-white/5 blur-[100px]" />
+                    <div className="absolute bottom-0 left-0 -ml-20 -mb-20 h-80 w-80 rounded-full bg-blue-500/10 blur-[100px]" />
+
+                    <div className="relative z-10 space-y-10">
+                        <h2 className="text-5xl font-bold tracking-tight sm:text-6xl italic font-serif">Studio Briefings</h2>
+                        <p className="mx-auto max-w-lg text-lg text-slate-400">
+                            Bespoke previews, styling guidance, and private sale invitations—delivered monthly to your inbox.
+                        </p>
+                        <form className="mx-auto flex max-w-lg flex-col gap-4 px-6 sm:flex-row">
+                            <input
+                                type="email"
+                                placeholder="Email address"
+                                className="input-field !bg-white/5 !text-white !ring-white/10 focus:!ring-white/30 h-14"
+                            />
+                            <button className="primary-btn !bg-white !text-slate-900 hover:!bg-slate-100 px-10 h-14">
+                                Join
+                            </button>
+                        </form>
+                    </div>
+                </motion.div>
+            </section>
+        </motion.main>
+    );
+};
+
+export default Home;

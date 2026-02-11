@@ -2,43 +2,72 @@
 
 @layer base {
   :root {
-    font-family: "Inter", "General Sans", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    /* Using a more sophisticated font stack for a premium feel */
+    font-family: "General Sans", "Inter", system-ui, sans-serif;
     color-scheme: light;
   }
 
   body {
-    @apply min-h-screen bg-stone-50 text-slate-900 antialiased;
-  }
-
-  ::selection {
-    @apply bg-slate-900 text-white;
+    /* Changed stone-50 to a slight gradient for more depth */
+    @apply min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 text-slate-900 antialiased;
   }
 }
 
 @layer utilities {
+  /* Ultra-smooth lift effect for portfolio items */
   .tilt-hover {
-    @apply transition duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_35px_120px_rgba(15,23,42,0.12)];
+    @apply transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+           hover:-translate-y-2 hover:shadow-[0_40px_100px_-15px_rgba(0,0,0,0.1)]
+           active:scale-[0.98];
+  }
+
+  /* Reveal animation for sections */
+  .reveal {
+    animation: reveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+  }
+
+  @keyframes reveal {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }
 
 @layer components {
+  /* Modern Glass: More transparency, better borders */
   .glass-panel {
-    @apply rounded-3xl border border-white/40 bg-white/80 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.08)] backdrop-blur;
+    @apply rounded-[2rem] border border-white/60 bg-white/40 p-8
+           shadow-[0_8px_32px_0_rgba(31,38,135,0.05)] backdrop-blur-xl
+           ring-1 ring-inset ring-slate-900/[0.03];
   }
 
+  /* Inputs: Softer, larger, and more tactile */
   .input-field {
-    @apply w-full rounded-2xl border border-slate-200 bg-white/80 px-4 py-3 text-base text-slate-900 placeholder:text-slate-400 transition focus:border-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900/10;
+    @apply w-full rounded-2xl border-0 bg-slate-100/50 px-5 py-4
+           text-base text-slate-900 ring-1 ring-inset ring-slate-200/60
+           transition-all duration-300 placeholder:text-slate-400
+           focus:bg-white focus:ring-2 focus:ring-slate-900/10 focus:outline-none;
   }
 
+  /* Button: Added a subtle glow and "magnetic" feel */
   .primary-btn {
-    @apply inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-slate-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900;
+    @apply relative inline-flex items-center justify-center overflow-hidden
+           rounded-full bg-slate-900 px-8 py-4 text-sm font-bold tracking-tight
+           text-white transition-all duration-300 hover:scale-105
+           hover:shadow-[0_20px_40px_-10px_rgba(15,23,42,0.3)] active:scale-95;
   }
 
+  /* Secondary: Soft outline style */
   .secondary-btn {
-    @apply inline-flex items-center justify-center rounded-full border border-slate-900/15 bg-white/70 px-5 py-2.5 text-xs font-medium uppercase tracking-wide text-slate-900 transition hover:border-slate-900/40;
+    @apply inline-flex items-center justify-center rounded-full
+           border border-slate-200 bg-white/50 px-6 py-3 text-xs
+           font-bold uppercase tracking-widest text-slate-700
+           backdrop-blur-sm transition-all hover:bg-white hover:border-slate-900;
   }
 
+  /* Tags: Gradient backgrounds make them "pop" */
   .tag-pill {
-    @apply inline-flex items-center rounded-full border border-slate-200 px-3 py-1 text-xs font-medium uppercase tracking-wide text-slate-600;
+    @apply inline-flex items-center rounded-full bg-slate-100/80 px-4 py-1.5
+           text-[10px] font-bold uppercase tracking-widest text-slate-500
+           ring-1 ring-inset ring-slate-200;
   }
 }
