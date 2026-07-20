@@ -1,31 +1,30 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/user.model');
+const jwt = require('jsonwebtoken')
+const User = require('../models/user.model')
 
 const protect = async (req, res, next) => {
-    try {
-        const token = req.cookies.token;
+	try {
+		const token = req.cookies.token
 
-        if (!token) {
-            return res.status(401).json({ error: 'Not authorized' });
-        }
+		if (!token) {
+			return res.status(401).json({ error: 'Not authorized' })
+		}
 
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+		const decoded = jwt.verify(token, process.env.JWT_SECRET)
 
-        const user = await User.findById(decoded.id).select("-password");
+		const user = await User.findById(decoded.id).select('-password')
 
-        if (!user) {
-            return res.status(401).json({ error: 'Not authorized' });
-        }
+		if (!user) {
+			return res.status(401).json({ error: 'Not authorized' })
+		}
 
-        req.user = user;
+		req.user = user
 
-        next();
-    } catch (error) {
-        console.log('error in protect middleware', error);
+		next()
+	} catch (error) {
+		console.log('error in protect middleware', error)
 
-        return res.status(401).json({ error: 'Not authorized' });
-    }
+		return res.status(401).json({ error: 'Not authorized' })
+	}
 }
 
-
-module.exports = { protect };
+module.exports = { protect }
